@@ -245,32 +245,6 @@ def get_project_by_name(gl, name, g_name=None):
     return projects[0]
 
 
-# add users to a group
-# adds users from a list of usernames to a group
-# this is mainly a test function
-# Input:
-    # gl: the GitLab object
-    # g_name: the name of the group to add to
-    # new_users: list of new users to add
-def add_users_to_group(gl, g_name, new_users):
-    try:
-        group = get_group_by_name(gl, g_name)
-    except RuntimeError as e:
-        print("Finding group failed with name: %s" % e)
-        sys.exit(1)
-        
-    for username in new_users:
-        # print(get_user_by_name(gl, username))
-        user = get_user_by_name(gl, username)
-        try:
-            group.members.create({'user_id': user.id,
-                                  'access_level': gitlab.DEVELOPER_ACCESS})
-            print("User %s added to group %s" % (user.name, group.name))
-        except gitlab.exceptions.GitlabCreateError as e:
-            # The expected error is "error 409: Member already exists"
-            # Just keep going
-            print("Encountered error: %s\nContinuing" % e)
-
 # add a user to a project in a given group
 #
 # Pre-conditions: gl is a GitLab object that has been properly initialized
