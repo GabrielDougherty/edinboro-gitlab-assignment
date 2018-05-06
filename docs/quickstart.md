@@ -78,7 +78,7 @@ In GitLab, a class (i.e., CSCI408), is a GitLab Group. This is simply a collecti
 
 Our script for creating such a group assumes that the course will be identified by a course name and sections number. Hence, the instructor (you) must only provide the course name (i.e., CSCI408), and its section number (i.e., 1) to create a class.
 
-In order to create the above class, section 1 of CSCI408, called `CSCI-408-1`, type:
+In order to create the above class, section 1 of CSCI408, called `csci-408-1`, type:
 
 `​$ python3 create-class.py --course-name "CSCI408" --course-section "1"​`
 
@@ -95,3 +95,25 @@ CSCI,408,1,SOFTWARE ENGINEERING,@00230405,Woods,Tiger,5-Oct-97,tw123456@scots.ed
 ```
 
 If multiple classes/sections of a class are included in the classlist file, then only the students from the specified class and section number will be added from the file.
+
+Creating Group Projects Within A Class
+--------------------------------------
+
+Once you have created a Gitlab group for a certain class, you can then create group projects within the class. These group projects allow students to all be in a repository together, allowing them to all make changes to the files within the repository. 
+
+Our script for creating group projects assumes that all of the users you wish to add to the groups have Gitlab accounts, and the class you wish to create the groups in has already been created as well. It also assumes you have created a .CSV file with the following format:
+
+```
+sm646464,pp646464
+lj232323,ai123456
+fb123456,tl123456
+```
+
+Each line represents each group. The group members should be identified using their Gitlab usernames and should be separated by a comma. This file would create 3 different groups with the two members each.
+
+To run the script to create a project called LinkedListProject in the Gitlab group csci-408-1, using the file groups.CSV type:
+
+`​$ python3 create-group-project.py --group-name csci-408-1 --project-name LinkedListProject --file-name groups.csv​`
+
+If there are multiple groups, each will be followed by a number value to differentiate between them. For the above example, you would get 3 different group repositories named LinkedListProject 1, LinkedListProject 2, and LinkedListProject 3.
+
