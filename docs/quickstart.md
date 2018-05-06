@@ -17,9 +17,10 @@ To install the `python-gitlab` module, type:
 
 In the directory that you would like your script to be installed, type:
 
-`$ git clone https://github.com/GabrielDougherty/edinboro-gitlab-assignment.git`
-
-`$ cd edinboro-gitlab-assignment`
+```
+$ git clone https://github.com/GabrielDougherty/edinboro-gitlab-assignment.git
+$ cd edinboro-gitlab-assignment
+```
 
 Now, you can run any script by typing, `python3 scriptname.py`
 
@@ -42,9 +43,11 @@ The first step to take in order to use scripts such as create-class.py, and crea
 
 For this script to function, a roster .CSV file must be included in the same directory that this script is included in. The roster file should follow a format that matches the following:
 
-`CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Bob,Jim,5-Oct-97,jb123456@scots.edinboro.edu`  
-`CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Jackson,Bo,5-Oct-97,bj123456@scots.edinboro.edu`  
-`CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Woods,Tiger,5-Oct-97,tw123456@scots.edinboro.edu` 
+```
+CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Bob,Jim,5-Oct-97,jb123456@scots.edinboro.edu  
+CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Jackson,Bo,5-Oct-97,bj123456@scots.edinboro.edu  
+CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Woods,Tiger,5-Oct-97,tw123456@scots.edinboro.edu 
+```
 
 Having multiple course and section numbers in the same file is fine, as the script will only create users that have a matching course and section number to what is defined by the professor (you). User accounts will be created using the following criteria:
 * Email - Edinboro student email
@@ -85,8 +88,10 @@ This script can also use a roster .CSV file to automatically add user accounts t
 
 The .CSV file should follow a format that matches the following:
 
-`CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Bob,Jim,5-Oct-97,jb123456@scots.edinboro.edu`  
-`CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Jackson,Bo,5-Oct-97,bj123456@scots.edinboro.edu`  
-`CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Woods,Tiger,5-Oct-97,tw123456@scots.edinboro.edu`  
+```
+CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Bob,Jim,5-Oct-97,jb123456@scots.edinboro.edu  
+CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Jackson,Bo,5-Oct-97,bj123456@scots.edinboro.edu  
+CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Woods,Tiger,5-Oct-97,tw123456@scots.edinboro.edu
+```
 
 If multiple classes/sections of a class are included in the classlist file, then only the students from the specified class and section number will be added from the file.
