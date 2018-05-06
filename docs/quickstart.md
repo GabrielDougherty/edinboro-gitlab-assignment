@@ -26,9 +26,9 @@ Now, you can run any script by typing, `python3 scriptname.py`
 Getting Help
 ------------
 
-To see the available arguments for a command, simply type the command without arguments.
+To see descriptions of the available arguments for a command, call the command with the `--help` flag.
 
-For example, typing `python3 create-class.py` lists the arguments for the `create-class` script.
+For example, typing `python3 create-class.py --help` provides the argument descriptions for the `create-class` script.
 
 Authentication
 --------------
