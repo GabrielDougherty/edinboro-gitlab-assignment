@@ -45,8 +45,8 @@ For this script to function, a roster .CSV file must be included in the same dir
 
 ```
 CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Bob,Jim,5-Oct-97,jb123456@scots.edinboro.edu  
-CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Jackson,Bo,5-Oct-97,bj123456@scots.edinboro.edu  
-CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Woods,Tiger,5-Oct-97,tw123456@scots.edinboro.edu 
+CSCI,408,1,SOFTWARE ENGINEERING,@00230405,Jackson,Bo,5-Oct-97,bj123456@scots.edinboro.edu  
+CSCI,408,1,SOFTWARE ENGINEERING,@00230405,Woods,Tiger,5-Oct-97,tw123456@scots.edinboro.edu 
 ```
 
 Having multiple course and section numbers in the same file is fine, as the script will only create users that have a matching course and section number to what is defined by the professor (you). User accounts will be created using the following criteria:
@@ -57,7 +57,7 @@ Having multiple course and section numbers in the same file is fine, as the scri
 
 So, looking at a user with the following information:
 
-`CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Bob,Jim,5-Oct-97,jb123456@scots.edinboro.edu`  
+`CSCI,408,1,SOFTWARE ENGINEERING,@00230405,Bob,Jim,5-Oct-97,jb123456@scots.edinboro.edu`  
 
 We would get a user account with the following attributes:
 * Email - jb123456@scots.edinboro.edu
@@ -89,9 +89,9 @@ This script can also use a roster .CSV file to automatically add user accounts t
 The .CSV file should follow a format that matches the following:
 
 ```
-CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Bob,Jim,5-Oct-97,jb123456@scots.edinboro.edu  
-CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Jackson,Bo,5-Oct-97,bj123456@scots.edinboro.edu  
-CSCI,408,1,SOFTWARE ENGINEERING,@00803819,Woods,Tiger,5-Oct-97,tw123456@scots.edinboro.edu
+CSCI,408,1,SOFTWARE ENGINEERING,@00230405,Bob,Jim,5-Oct-97,jb123456@scots.edinboro.edu  
+CSCI,408,1,SOFTWARE ENGINEERING,@00230405,Jackson,Bo,5-Oct-97,bj123456@scots.edinboro.edu  
+CSCI,408,1,SOFTWARE ENGINEERING,@00230405,Woods,Tiger,5-Oct-97,tw123456@scots.edinboro.edu
 ```
 
 If multiple classes/sections of a class are included in the classlist file, then only the students from the specified class and section number will be added from the file.
