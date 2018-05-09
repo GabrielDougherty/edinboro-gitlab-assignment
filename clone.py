@@ -6,7 +6,7 @@ import argparse,getpass,re,time
 from datetime import datetime
 import sys,subprocess,os
 import json,urllib.request
-from config import host_url, host_url_just_fqdn
+from config import host_url, host_url_just_fqdn, proto_type
 
 #
 # Helper functions
