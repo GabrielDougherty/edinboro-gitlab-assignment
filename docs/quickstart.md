@@ -30,11 +30,6 @@ To see the available arguments for a command, simply type the command without ar
 
 For example, typing `python3 create-class.py` lists the arguments for the `create-class` script.
 
-Authentication
---------------
-
-TODO
-
 Creating User Accounts
 ----------------------
 
