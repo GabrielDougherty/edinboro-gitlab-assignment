@@ -207,7 +207,7 @@ def get_group_by_name(gl, name):
 #     name: the name of the user
 def get_user_by_name(gl, name):
     users = gl.users.list(all=True,username=name)
-    users = search_match(users, name)
+    # users = search_match(users, name)
 
     # there should only be one user with this name
     bad_search_check(users, "users", name)
