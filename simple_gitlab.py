@@ -103,6 +103,15 @@ def get_group_id(group_name):
 # this function is useful because we use a token file
 # takes in the base instance URL, optional private token or token_filename
 # it only works if it has a token
+#
+# Pre-conditions: private_token, token, or token_filename is set. If
+#     token_filename is used, it should be a string with the filename of a valid
+#     file. The token must contain a valid GitLab private token.
+#     url should be passed, or host_url should be set. The URL should contain
+#     a valid URL (including "http://" or "https://") of the GitLab server.
+# Post-conditions: a GitLab object from the python-gitlab shall be returned,
+#     or an error will be thrown.
+#
 # Input:
 #     url: GitLab instance URL base address
 #     token: a string containing the private token
@@ -130,6 +139,12 @@ def make_gitlab_obj(url=host_url, token=None, token_filename=None):
 
 # Helper function for search error handling.
 # Raise an error if there are multpile results from a GitLab search
+#
+# Pre-conditions: result is a list of items from a python-gitlab search
+#     lst_name is a valid string, item name is a valid string
+# Post-conditions: nothing is returned if the search operated correctly
+#     An exception will be thrown if the length of the result is incorrect
+#
 # Input:
 #     result: a list containing the search result
 #     lst_name: the name of the list, i.e., "users" or "groups"
@@ -143,6 +158,12 @@ def bad_search_check(result, lst_name, item_name):
         raise RuntimeError("No %s found with name: %s" % (lst_name, item_name))
 
 # filters the GitLab search by the given name
+#
+# Pre-conditions: lst is a Python list of python-gitlab objects
+#     name is a string
+# Post-conditions: returns a list containing only python-gitlab objects with
+#     names matching the given name
+#
 # Input:
 #     lst: a list of GitLab objects which have names, i.e., groups
 #     name: the name of the desired object
@@ -150,6 +171,14 @@ def search_match(lst, name):
     return list(filter(lambda item: item.name == name, lst))
 
 # returns group object
+#
+# Pre-conditions: gl is a GitLab object that has been properly initialized
+#     with make_gitlab_obj()
+#     name is a string, the name of the group
+# Post-conditions: an error is thrown if multiple groups exist with the given
+#     name
+#     otherwise, returns the python-gitlab group object that has been found
+#
 # Input:
 #     gl: the GitLab object
 #     name: the name of the group
@@ -165,6 +194,14 @@ def get_group_by_name(gl, name):
 
 
 # retrieve a user, given their name
+#
+# Pre-conditions: gl is a GitLab object that has been properly initialized
+#     with make_gitlab_obj()
+#     name is a string, the name of the user
+# Post-conditions: an error is thrown if multiple users exist with the given
+#     name
+#     otherwise, returns the python-gitlab user object that has been found
+#
 # Input:
 #     gl: the GitLab object
 #     name: the name of the user
@@ -179,6 +216,14 @@ def get_user_by_name(gl, name):
 
 
 # retrieve a project, given its name
+#
+# Pre-conditions: gl is a GitLab object that has been properly initialized
+#     with make_gitlab_obj()
+#     name is a string, the name of the project
+# Post-conditions: an error is thrown if multiple projects exist with the given
+#     name
+#     otherwise, returns the python-gitlab project object that has been found
+#
 # Input:
 #     gl: the GitLab object
 #     name: the name of the project
@@ -200,33 +245,16 @@ def get_project_by_name(gl, name, g_name=None):
     return projects[0]
 
 
-# add users to a group
-# adds users from a list of usernames to a group
-# this is mainly a test function
-# Input:
-    # gl: the GitLab object
-    # g_name: the name of the group to add to
-    # new_users: list of new users to add
-def add_users_to_group(gl, g_name, new_users):
-    try:
-        group = get_group_by_name(gl, g_name)
-    except RuntimeError as e:
-        print("Finding group failed with name: %s" % e)
-        sys.exit(1)
-        
-    for username in new_users:
-        # print(get_user_by_name(gl, username))
-        user = get_user_by_name(gl, username)
-        try:
-            group.members.create({'user_id': user.id,
-                                  'access_level': gitlab.DEVELOPER_ACCESS})
-            print("User %s added to group %s" % (user.name, group.name))
-        except gitlab.exceptions.GitlabCreateError as e:
-            # The expected error is "error 409: Member already exists"
-            # Just keep going
-            print("Encountered error: %s\nContinuing" % e)
-
 # add a user to a project in a given group
+#
+# Pre-conditions: gl is a GitLab object that has been properly initialized
+#     with make_gitlab_obj()
+#     user_id is the user ID of the new project member, an integer
+#     proj_name is the project name, a string
+#     g_name is a string, the name of the group, optionally passed
+# Post-conditions: an error is thrown if multiple groups exist with the given
+#     name
+#     otherwise, creates a project in the GitLab server with the given name
 # Input:
 #     gl: the GitLab object
 #     user_id: the user ID of the new project member. It's an integer
