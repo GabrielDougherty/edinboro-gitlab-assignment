@@ -11,16 +11,18 @@ You must have `git`, `python3.4`, and `pip3` installed. This guide assumes a Lin
 Installation
 ------------
 
-To install the `python-gitlab` module, type:
-
-`$ pip3 install python-gitlab`
-
 In the directory that you would like your script to be installed, type:
 
 ```
 $ git clone https://github.com/GabrielDougherty/edinboro-gitlab-assignment.git
 $ cd edinboro-gitlab-assignment
 ```
+To install the `python-gitlab` module, in the project directory, type:
+
+`$ pip3 install -u -r requirements.txt`
+
+This will install the module for the current user.
+
 
 Now, you can run any script by typing, `python3 scriptname.py`
 
