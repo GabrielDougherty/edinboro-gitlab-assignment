@@ -1,0 +1,46 @@
+#+TITLE: System Demonstration
+
+* Documentation
+
+[[https://github.com/GabrielDougherty/edinboro-gitlab-assignment/blob/docs/docs/quickstart.md][Quick Start Guide]]
+
+* Getting help with ~--help~
+
+~./create-users.py --help~
+
+* Create users
+
+~./create-users.py --file-name csci408.csv --course-number 408 --course-section 1~
+
+Creates users from a student roster file, filtered by class
+
+[[http://codestore.cs.edinboro.edu/admin/users][List of users]]
+
+* Create class
+
+~./create-class.py --course-name csci411 --course-section 1~
+
+[[http://codestore.cs.edinboro.edu/csci-411-1][Class page]]
+
+* Add student repos to class
+
+~./create-repos.py --token-file test_token --classlist students-csci408.txt --add-students csci-411-1~
+
+This creates the student repos and adds the student accounts to them
+
+[[http://codestore.cs.edinboro.edu/csci-411-1][Class page]]
+
+
+* Create group project
+
+~./create-group-project.py --group-name csci-411-1 --file-name group-students-csci411.txt --project-name project-1~
+
+[[http://codestore.cs.edinboro.edu/csci-411-1][Class page]]
+
+* Clone a project
+
+~./clone.py --revert-date "2018-05-30 15:10" --token-file test_token csci-411-1~
+
+* Batch processing
+
+~./batch-operation.py gabriel-class "ls -1a"​~
