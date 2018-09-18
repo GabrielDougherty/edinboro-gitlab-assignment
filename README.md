@@ -19,7 +19,7 @@ $ cd edinboro-gitlab-assignment
 ```
 To install the `python-gitlab` module, in the project directory, type:
 
-`$ pip3 install -u -r requirements.txt`
+`$ pip3 install --user -r requirements.txt`
 
 This will install the module for the current user.
 
