@@ -29,6 +29,7 @@ parser.add_argument('--course-name', required=True, help="The course name (ex. C
 parser.add_argument('--course-section',  required=True, help="The section of the course to create a Gitlab group for.")
 parser.add_argument('--add-students', const=1, type=int, nargs='?', help="Use this if you wish to also add all students for this course to the Gitlab group.")
 parser.add_argument('--file-name', nargs='?', help="The .CSV file from which you want to pull user data from.")
+parser.add_argument('--semester', nargs='?', help="The semester for the class. Spring or Fall.")
 
 args = parser.parse_args()
 
@@ -37,13 +38,14 @@ class_name = args.course_name
 class_section = args.course_section
 add_students = args.add_students
 file_name = args.file_name
+semester = args.semester
 
 class_name = class_name.lower()
 subject = class_name[0:4]
 course_number = class_name[4:7]
 
 # Create string for the Gitlab group name based on arguments
-gitlab_group_name = subject + "-" + course_number + "-" + class_section
+gitlab_group_name = subject + "-" + course_number + "-" + class_section + "-" + semester
 
 # Add user to the group
 
