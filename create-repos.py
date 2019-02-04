@@ -16,6 +16,7 @@ parser.add_argument('--cookie-file', default="/dev/stdin",
                     help="Path to file containing your Gitlab _gitlab_session cookie value. Default is to read from standard input.")
 parser.add_argument('--add-students', action='store_true',
                     help="By default, students will not be added to their repos. Set this option to add them, which will email them too.")
+parser.add_argument('--assignments', help="Number of assignments.", default="4")
 students_arg_group = parser.add_mutually_exclusive_group()
 students_arg_group.add_argument('--classlist', nargs=1, help="Path to your course's .classlist file on the student.cs Linux servers.")
 students_arg_group.add_argument('--students', help="A comma separated list of student Quest IDs. Create repositories for these students only.")
@@ -26,6 +27,7 @@ group_name = args.group_name
 token_file = args.token_file
 add_students = args.add_students
 cookie_file = args.cookie_file
+assignment_amt = args.assignments
 
 # Read private token from keyboard or from file
 simple_gitlab.set_private_token(token_file)
@@ -83,7 +85,8 @@ for student in students:
     if not master_branch_exists:
         print("> master branch doesn't exist for %s. Creating it." % student)
         time.sleep(3)
-        for assn in ['A0', 'A1', 'A2', 'A3', 'A4']:
+        assignment_names = ['A' + str(n) for n in range(1,int(assignment_amt)+1)]
+        for assn in assignment_names:
             print("> Doing work for assignment %s" % assn)
             simple_gitlab.request('projects/%d/repository/files' % project_ids[student],
                            post_hash={'file_path':("%s/.gitignore" % assn), 'branch_name':"master", 'content':"*.class\n", 'commit_message':("Creating %s folder" % assn)})
