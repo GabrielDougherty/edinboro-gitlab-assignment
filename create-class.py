@@ -28,8 +28,8 @@ parser = argparse.ArgumentParser(description="This script is used to create a Gi
 parser.add_argument('--course-name', required=True, help="The course name (ex. CSCI125) of the desired course to create a Gitlab group for.")
 parser.add_argument('--course-section',  required=True, help="The section of the course to create a Gitlab group for.")
 parser.add_argument('--add-students', const=1, type=int, nargs='?', help="Use this if you wish to also add all students for this course to the Gitlab group.")
-parser.add_argument('--file-name', nargs='?', help="The .CSV file from which you want to pull user data from.")
-parser.add_argument('--semester', nargs='?', help="The semester for the class. Spring or Fall.")
+parser.add_argument('--file-name', help="The .CSV file from which you want to pull user data from.")
+parser.add_argument('--semester', required=True, help="The semester for the class. Spring or Fall.")
 
 args = parser.parse_args()
 
