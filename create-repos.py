@@ -48,7 +48,6 @@ elif args.classlist:
             userid = userid[0:8]
             students.append(userid)
 
-# Create a hash mapping student usernames to the id of their project/repo
 # This should be empty. If not, it means some projects have already
 # been created.
 group_id = simple_gitlab.get_group_id(group_name)
@@ -85,7 +84,7 @@ for student in students:
     if not master_branch_exists:
         print("> master branch doesn't exist for %s. Creating it." % student)
         time.sleep(3)
-        assignment_names = ['A' + str(n) for n in range(1,int(assignment_amt)+1)]
+        assignment_names = ['A' + f'{n:03}' for n in range(1,int(assignment_amt)+1)]
         for assn in assignment_names:
             print("> Doing work for assignment %s" % assn)
             simple_gitlab.request('projects/%d/repository/files' % project_ids[student],
