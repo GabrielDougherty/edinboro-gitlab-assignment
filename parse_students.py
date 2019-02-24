@@ -2,7 +2,7 @@
 import csv
 
 # parse student csv file for students taking specified course
-def parse_students(file_name, course_number, class_section):
+def parse_students(file_name, course_number=None, class_section=None):
     students = []
     # --file-name flag not set
     if(file_name is None):
@@ -20,6 +20,8 @@ def parse_students(file_name, course_number, class_section):
     # Search file for students    
     for line in studentreader:
         if (course_number == line[1] and class_section == line[2]):
+            students.append(line)
+        elif (course_number == None and class_section == None):
             students.append(line)
 
     file.close()
