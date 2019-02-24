@@ -48,6 +48,7 @@ elif args.classlist:
             userid = userid[0:8]
             students.append(userid)
 
+# Create a hash mapping student usernames to the id of their project/repo
 # This should be empty. If not, it means some projects have already
 # been created.
 group_id = simple_gitlab.get_group_id(group_name)
