@@ -6,6 +6,7 @@ import sys,subprocess,os
 import json,urllib.request
 import simple_gitlab
 from config import host_url, host_url_just_fqdn
+from parse_students import parse_students
 
 # Parse command-line arguments.
 parser = argparse.ArgumentParser(description="This script is used to create student repositories.")
@@ -17,6 +18,8 @@ parser.add_argument('--cookie-file', default="/dev/stdin",
 parser.add_argument('--add-students', action='store_true',
                     help="By default, students will not be added to their repos. Set this option to add them, which will email them too.")
 parser.add_argument('--assignments', help="Number of assignments.", default="4")
+parser.add_argument('--course-name', required=False, help="The course name (ex. CSCI125) of the desired course to create repos for.")
+parser.add_argument('--course-section',  required=False, help="The section of the course to create repos for.")
 students_arg_group = parser.add_mutually_exclusive_group()
 students_arg_group.add_argument('--classlist', nargs=1, help="Path to your course's .classlist file on the student.cs Linux servers.")
 students_arg_group.add_argument('--students', help="A comma separated list of student Quest IDs. Create repositories for these students only.")
@@ -28,6 +31,8 @@ token_file = args.token_file
 add_students = args.add_students
 cookie_file = args.cookie_file
 assignment_amt = args.assignments
+class_name = args.course_name
+class_section = args.course_section
 
 # Read private token from keyboard or from file
 simple_gitlab.set_private_token(token_file)
@@ -39,14 +44,8 @@ if args.students:
     students = list(filter(lambda s: s and not s.isspace(), students))
     students = list(map(lambda s:s[:8],students))
 elif args.classlist:
-    classlist_regex = re.compile('[a-z]{2}[0-9]{6}')
-    classlist_file = args.classlist[0]
-    for line in open(classlist_file, 'r'):
-        match = classlist_regex.match(line)
-        if match != None:
-            userid = match.group(0)
-            userid = userid[0:8]
-            students.append(userid)
+    students = parse_students(classlist_file, course_numboer, class_section)
+    students = list(map(lambda x: x[8][:8],students))
 
 # Create a hash mapping student usernames to the id of their project/repo
 # This should be empty. If not, it means some projects have already

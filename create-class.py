@@ -5,6 +5,8 @@ import re
 import argparse
 import sys
 import os
+import csv
+from parse_students import parse_students
 
 # This script is used to create a Gitlab group for a specified class and section. It can also use
 # a classlist .CSV file to automatically add users that belong to that class and section to the 
@@ -77,43 +79,22 @@ def create_group():
         print("Gitlab group created with name " + gitlab_group_name)
     except:
         print("Couldn't create Gitlab group for this class, group may already exist.")
-        sys.exit()
 
 
+create_group()
 
-
-file = None
-students = []
 if(add_students is not None):
-    # --file-name flag not set
-    if(file_name is None):
-        print("File could not be found. Make sure you have used the '--file-name' flag correctly.")
-        sys.exit()
-    else:
-        # Try to open the file for reading
-        try: 
-            file = open(file_name, 'r')
-        except FileNotFoundError:
-            print("File could not be found. Make sure file exists in this directory, and you have typed the name correctly.")
-            sys.exit()
-
-    # Search file for students    
-    for line in file:
-        user_data = re.split(',', line.rstrip())
-        if (course_number == user_data[1] and class_section == user_data[2]):
-            students.append(user_data)
+    students = parse_students(file_name, course_number, class_section)
+            
     # If no students could be found in file with matching course number/section
     if(len(students) == 0):
         print("No students could be found for this class and section. Make sure the course number and section number are correct. GitLab group not created.")
     # If everything is OK, create new GitLab group and add all students from file
     else:
-        create_group()
         for student in students:
             add_user_to_group(student)
     file.close()
 
-if(add_students is None):
-    create_group()
 
 
 
