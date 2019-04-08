@@ -1,12 +1,12 @@
 Quickstart
 ==========
 
-This is a quickstart guide to using the Edinboro Assignment Submission System
+This is a quickstart guide for faculty on using the Edinboro Assignment Submission System
 
 Prerequisites
 -------------
 
-You must have `git`, `python3.4`, and `pip3` installed. This guide assumes a Linux machine is used. In order to create students, you must be an administrator on the codestore instance. Talk to your system administrator for these priveleges if you are an instructor and you plan on creating users.
+You must have `git`, `python >= 3.4`, and `pip3` installed. This guide assumes a Linux machine is used. In order to create students, you must be an administrator on the codestore instance. Talk to your system administrator for these priveleges if you are an instructor and you plan on creating users.
 
 Installation
 ------------
@@ -32,6 +32,23 @@ Getting Help
 To see descriptions of the available arguments for a command, call the command with the `--help` flag.
 
 For example, typing `python3 create-class.py --help` provides the argument descriptions for the `create-class` script.
+
+Getting Authenticated
+---------------------
+
+In order to use these scripts, you must creat an authentication token.
+
+In your installation directory `edinboro-gitlab-assignment`, create a text document called `test_token`:
+
+```
+$ touch test_token
+```
+
+Then go to the [codestore](http://codestore.cs.edinboro.edu/users/sign_in) and log in. If you are faculty and you don't already have an account, you should create an account at this step. If you're a student, then the codestore admnistrator should create a login for you.
+
+Once you are logged in, click on the profile icon in the top right, then click on Settings in the drop-down. In the resulting page, click on Access Tokens. In this page, you must create an access token to be used for all of your classes you would like to manage. Give it a name like MyToken, and check the "api" box. Then click "Create personal access token."
+
+In the resulting page, copy the text string under "Your New Personal Access Token" and paste it into your test_token using the text editor of your choice. Save that document, and you will be properly authenticated for using all of the scripts.
 
 Creating User Accounts
 ----------------------
