@@ -90,15 +90,15 @@ Creating a class
 
 In GitLab, a class (i.e., CSCI408), is a GitLab Group. This is simply a collection of repositories on the server.
 
-Our script for creating such a group assumes that the course will be identified by a course name and sections number. Hence, the instructor (you) must only provide the course name (i.e., CSCI408), and its section number (i.e., 1) to create a class.
+Our script for creating such a group assumes that the course will be identified by a course name and sections number. Hence, the instructor (you) must only provide the course name (i.e., CSCI408), its section number (i.e., 1), and the semester (Fall or Spring) to create a class.
 
 In order to create the above class, section 1 of CSCI408, called `csci-408-1`, type:
 
-`​$ python3 create-class.py --course-name "CSCI408" --course-section "1"​`
+`​$ python3 create-class.py --course-name "CSCI408" --semester "Spring" --course-section "1"​`
 
 This script can also use a roster .CSV file to automatically add user accounts to the Gitlab group being created. This file must be included in the same directory as this script is included in. In order to create the above class, and add students from a roster file, type:
 
-`​$ python3 create-class.py --course-name "CSCI408" --course-section "1" --file-name "csci408.csv"​`
+`​$ python3 create-class.py --course-name "CSCI408" --course-section "1" --semester "Spring" --file-name "csci408.csv"​`
 
 The .CSV file should follow a format that matches the following:
 

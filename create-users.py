@@ -43,7 +43,7 @@ class_section = args.course_section
 # Username = Edinboro email address up to the @
 # Password = Lastname (with capital first letter) + 6 digit number in Edinboro email
 # Name = First and last name
-def createUser(user):
+def create_user(user):
     email = user[8]
     username = user[8][0:8]
     password = user[5] + user[8][2:8]
@@ -62,20 +62,13 @@ def createUser(user):
 
 # Parse file, find any entries that match the above input
 # and send entries to the create user function
-found = False
-try: 
-    file = open(file_name, 'r')
-    for line in file:
-        user_data = re.split(',', line.rstrip())
-        if (class_name == user_data[1] and class_section == user_data[2]):
-            print("Adding: " + user_data[6] + " " + user_data[5])
-            found = True
-            createUser(user_data)
-    file.close()
-except FileNotFoundError:
-    print("File could not be found. Make sure file exists in this directory, and you have typed the name correctly.")
+students = parse_students(file_name, class_number, class_section)
 
-if(found == False):
+for student in students:
+    print("Adding: " + user_data[6] + " " + user_data[5])
+    create_user(student)
+
+if not students:
     print("No students could be found for this class and section. Make sure the course number and section number are correct.")
 
 
