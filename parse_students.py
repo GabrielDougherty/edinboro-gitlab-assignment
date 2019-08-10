@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import csv
+import sys
 
 # parse student csv file for students taking specified course
 def parse_students(file_name, course_number=None, class_section=None):

@@ -186,7 +186,7 @@ for url_info in urls:
             if event['action_name'] in ['pushed to', 'pushed new'] and event['data']['ref'] == 'refs/heads/master':
                 # Gitlab has time in a format not easily read by Python's datetime,
                 # so do a little formatting with regex.
-                created_at_py = re.sub('([\d]{2})\.[\d]{3}(.[\d]{2}):([\d]{2})', r"\1\2\3", event['created_at'])
+                created_at_py = re.sub(r'([\d]{2})\.[\d]{3}(.[\d]{2}):([\d]{2})', r"\1\2\3", event['created_at'])
                 created_at = datetime.strptime(created_at_py, "%Y-%m-%dT%H:%M:%S%z")
                 if created_at <= revert_date and (not ontime_push_time or created_at > ontime_push_time):
                     ontime_push_time = created_at

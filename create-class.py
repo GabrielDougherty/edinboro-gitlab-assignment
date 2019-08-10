@@ -75,7 +75,7 @@ def add_user_to_group(user_data):
 #   - A Gitlab group with the predefined group name is created 
 def create_group():
     try:
-        group = gl.groups.create({'name':gitlab_group_name, 'path':gitlab_group_name})
+        gl.groups.create({'name':gitlab_group_name, 'path':gitlab_group_name})
         print("Gitlab group created with name " + gitlab_group_name)
     except:
         print("Couldn't create Gitlab group for this class, group may already exist.")
@@ -93,8 +93,3 @@ if(add_students is not None):
     else:
         for student in students:
             add_user_to_group(student)
-    file.close()
-
-
-
-

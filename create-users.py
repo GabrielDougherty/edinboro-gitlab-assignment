@@ -2,6 +2,7 @@
 import simple_gitlab
 import re
 import argparse
+from parse_students import parse_students
 
 # This script is used alongside a classlist .csv file to create Gitlab user accounts for
 # all students in a certain class and section.
@@ -28,7 +29,7 @@ args = parser.parse_args()
 
 #Set arguments as variables
 file_name = args.file_name
-class_name = args.course_number
+course_number = args.course_number
 class_section = args.course_section
 
 # Pulls user information from the file
@@ -50,10 +51,10 @@ def create_user(user):
     name = user[6] + " " + user[5]
     try:  
         # Create user account using data from file
-        createUser = gl.users.create({'email': email,
-                                'password': password,
-                                'username': username,
-                                'name': name})
+        gl.users.create({'email': email,
+                        'password': password,
+                        'username': username,
+                        'name': name})
     except:
         print("Couldn't create student account, account may already exist.")
                             
@@ -62,10 +63,10 @@ def create_user(user):
 
 # Parse file, find any entries that match the above input
 # and send entries to the create user function
-students = parse_students(file_name, class_number, class_section)
+students = parse_students(file_name, course_number, class_section)
 
 for student in students:
-    print("Adding: " + user_data[6] + " " + user_data[5])
+    print("Adding: " + student[6] + " " + student[5])
     create_user(student)
 
 if not students:
